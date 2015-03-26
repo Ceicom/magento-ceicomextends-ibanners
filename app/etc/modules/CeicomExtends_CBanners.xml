@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <CeicomExtends_CBanners>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Core />
+                <Mage_Catalog />
+                <Mage_Adminhtml />
+                <Fishpig_iBanners/>
+                <Mage_Cms />
+            </depends>
+        </CeicomExtends_CBanners>
+    </modules>
+</config>

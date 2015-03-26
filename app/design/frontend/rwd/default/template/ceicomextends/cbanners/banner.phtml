@@ -1,0 +1,36 @@
+<?php if ($title): ?>
+
+    <div class="product-name">
+        <h1><a href="/"><?php echo $title ?></a></h1>
+    </div>
+
+<?php endif ?>
+
+<div class="banner <?php echo $customCSS ?>">
+<?php $banners = $this->getBannerCollection(); foreach ($banners as $banner): ?>
+
+<?php if($this->validBanner($banner)): ?>
+
+    <?php if(!empty($banner->getHtml())): ?>
+
+        <?php echo $this->displayHtml($banner);?>
+
+    <?php elseif($banner->getType() == 'timer'): ?>
+
+        <div class="banner-timer" id="timer-<?php echo $banner->getId();  ?>" style="background: url(/media/ibanners/<?php  echo $banner->getImage(); ?>); color: red;" data-secondsLeft="<?php echo $this->getTimeLeft($banner); ?>"></div>
+        <script type="text/javascript">
+            jQuery(function () {
+                jQuery('#timer-<?php echo $banner->getId();  ?>').countdown();
+            });
+        </script>
+
+    <?php else: ?>
+
+        <img src="/media/ibanners/<?php  echo $banner->getImage(); ?>" width="100%">
+
+    <?php endif; ?>
+
+<?php endif; ?>
+
+<?php endforeach; ?>
+</div>
