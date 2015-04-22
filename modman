@@ -1,0 +1,4 @@
+app/code/local/CeicomExtends/CBanners app/code/local/CeicomExtends/CBanners
+app/code/design/frontend/base/default/layout/ceicomextends app/code/design/frontend/base/default/layout/ceicomextends
+app/code/design/frontend/rwd/default/template/ceicomextends app/code/design/frontend/rwd/default/template/ceicomextends
+app/etc/modules/* app/etc/modules/
