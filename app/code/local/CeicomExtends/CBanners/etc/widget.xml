@@ -20,6 +20,14 @@
                 <type>text</type>
                 <value></value>
             </css_class>
+            <custom_template>
+                <visible>1</visible>
+                <required>0</required>
+                <label>Custom template</label>
+                <description>Caminho do template .phtml</description>
+                <type>text</type>
+                <value></value>
+            </custom_template>
             <banners translate="label">
                 <label>Banners</label>
                 <visible>1</visible>

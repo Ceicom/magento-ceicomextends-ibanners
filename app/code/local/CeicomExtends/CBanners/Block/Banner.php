@@ -7,7 +7,6 @@ class CeicomExtends_CBanners_Block_Banner extends Mage_Core_Block_Template imple
     {
         $this->assign('title',$this->getData('title'));
         $this->assign('customCSS',$this->getData('css_class'));
-
         $this->setTemplate('ceicomextends/cbanners/banner.phtml');
 
         $bannersGroupData = Mage::getModel('ibanners/group')->getCollection()
@@ -34,6 +33,30 @@ class CeicomExtends_CBanners_Block_Banner extends Mage_Core_Block_Template imple
         return parent::_toHtml();
     }
 
+    public function getBannerHtml($banner)
+    {
+        $helper = Mage::helper('cbanners');
+        $html = '';
+
+        if($banner->getType() == 'timer') {
+            $cssClass = "banner-timer {$banner->getCssClass()}";
+            $id = "{$banner->getType()}-{$banner->getId()}";
+        }else {
+            $cssClass = $banner->getCssClass();
+            $id = $banner->getId();
+        }
+
+        $helper->setImage( array( $id, $cssClass, "{$banner->getImage()}", $banner->getAltText(), $helper->getTimeLeft($banner) ) );
+
+        if (trim($banner->getHtml()) != ''  ) {
+            $html = str_replace('{{image}}', $helper->getImage(), $banner->getHtml());
+        }else {
+            $html = $helper->getImage();
+        }
+
+        return $html;
+    }
+
     public function getBannerCollection()
     {
         return $this->banners;
@@ -42,31 +65,6 @@ class CeicomExtends_CBanners_Block_Banner extends Mage_Core_Block_Template imple
     protected function setBannerCollection($data)
     {
         $this->banners = $data;
-    }
-
-    public function displayHtml($banner)
-    {
-        if (!empty($banner->getHtml())) {
-            $html = str_replace("{{image}}","<img src='/media/ibanners/{$banner->getImage()}' width='100%'>",$banner->getHtml());
-        }else {
-            $html = "<img src='/media/ibanners/{$banner->getImage()}' width='100%'>";
-        }
-
-        return $html;
-    }
-
-    public function getTimeLeft($banner)
-    {
-        return strtotime($banner->getEndTime()) - strtotime( Mage::getModel('core/date')->date('Y-m-d H:i'));
-    }
-
-    public function validBanner($banner)
-    {
-        $start_ts = strtotime($banner->getStartTime());
-        $end_ts = strtotime($banner->getEndTime());
-        $user_ts = strtotime(Mage::getModel('core/date')->date('Y-m-d H:i'));
-
-        return ( ($banner->getKeepExpiredBanner()) || ($user_ts >= $start_ts) && ($user_ts <= $end_ts));
     }
 
 }

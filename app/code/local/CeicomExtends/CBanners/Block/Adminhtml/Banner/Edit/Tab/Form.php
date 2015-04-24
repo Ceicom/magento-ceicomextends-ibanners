@@ -90,11 +90,12 @@ class CeicomExtends_CBanners_Block_Adminhtml_Banner_Edit_Tab_Form extends Mage_A
             'title'     => $this->__('URL')
         ));
 
-        $fieldset->addField('url_target', 'text', array(
+        $fieldset->addField('url_target', 'select', array(
             'name'      => 'url_target',
             'label'     => $this->__('URL Target'),
             'title'     => $this->__('URL Target'),
             'comment' => $this->__('If empty, current window/tab will be used'),
+            'values' => Mage::getModel('cbanners/Targets')->toOptionArray()
         ));
 
         $fieldset->addField('alt_text', 'text', array(
@@ -103,11 +104,18 @@ class CeicomExtends_CBanners_Block_Adminhtml_Banner_Edit_Tab_Form extends Mage_A
             'title'     => $this->__('ALT Text'),
         ));
 
+        $fieldset->addField('css_class', 'text', array(
+            'name'          => 'css_class',
+            'label'         => $this->__('CSS Class'),
+            'title'         => $this->__('CSS Class')
+        ));
+
         $fieldset->addField('html', 'editor', array(
             'name'      => 'html',
             'label'     => $this->__('HTML'),
             'title'     => $this->__('HTML'),
             'style'     => 'height: 120px; width: 98%;',
+            'note' => $this->__('use {{image}} for define the image location.'),
         ));
 
         $fieldset->addField('image', 'image', array(

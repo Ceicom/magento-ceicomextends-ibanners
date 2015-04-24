@@ -1,36 +1,41 @@
+<?php
+ $helper = Mage::helper('cbanners');
+ $banners = $this->getBannerCollection();
+?>
+
 <?php if ($title): ?>
-
-    <div class="product-name">
-        <h1><a href="/"><?php echo $title ?></a></h1>
-    </div>
-
+    <h2><a href="/"><?php echo $title ?></a></h2>
 <?php endif ?>
 
-<div class="banner <?php echo $customCSS ?>">
-<?php $banners = $this->getBannerCollection(); foreach ($banners as $banner): ?>
 
-<?php if($this->validBanner($banner)): ?>
+<?php foreach ($banners as $banner): ?>
+    <?php echo $helper->groupHtmlWrap($banner, 'start'); ?>
 
-    <?php if(!empty($banner->getHtml())): ?>
+        <?php if( $helper->isWithinTheTime($banner) ): ?>
 
-        <?php echo $this->displayHtml($banner);?>
+            <?php if ( $helper->haveLink() ) : ?>
 
-    <?php elseif($banner->getType() == 'timer'): ?>
+                <a href="<?php echo $banner->getUrl(); ?>" target="<?php echo $banner->getUrlTarget(); ?>">
+                    <?php echo $this->getBannerHtml($banner); ?>
+                </a>
 
-        <div class="banner-timer" id="timer-<?php echo $banner->getId();  ?>" style="background: url(/media/ibanners/<?php  echo $banner->getImage(); ?>); color: red;" data-secondsLeft="<?php echo $this->getTimeLeft($banner); ?>"></div>
-        <script type="text/javascript">
-            jQuery(function () {
-                jQuery('#timer-<?php echo $banner->getId();  ?>').countdown();
-            });
-        </script>
+            <?php else:  ?>
 
-    <?php else: ?>
+                <?php echo $this->getBannerHtml($banner); ?>
 
-        <img src="/media/ibanners/<?php  echo $banner->getImage(); ?>" width="100%">
+            <?php endif; ?>
 
-    <?php endif; ?>
+            <?php if($banner->getType() == 'timer'): ?>
 
-<?php endif; ?>
+                <script type="text/javascript">
+                    jQuery(function () {
+                        jQuery('#timer-<?php echo $banner->getId();  ?>').countdown();
+                    });
+                </script>
 
+            <?php endif; ?>
+
+        <?php endif; ?>
+
+    <?php echo $helper->groupHtmlWrap($banner, 'end'); ?>
 <?php endforeach; ?>
-</div>
