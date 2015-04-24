@@ -7,7 +7,12 @@ class CeicomExtends_CBanners_Block_Banner extends Mage_Core_Block_Template imple
     {
         $this->assign('title',$this->getData('title'));
         $this->assign('customCSS',$this->getData('css_class'));
-        $this->setTemplate('ceicomextends/cbanners/banner.phtml');
+
+        if(trim($this->getData('custom_template')) != '') {
+            $this->setTemplate($this->getData('custom_template'));
+        }else {
+            $this->setTemplate('ceicomextends/cbanners/banner.phtml');
+        }
 
         $bannersGroupData = Mage::getModel('ibanners/group')->getCollection()
             ->addFieldToFilter('group_id', array('in' => explode(',', $this->getData('banner_groups'))));
