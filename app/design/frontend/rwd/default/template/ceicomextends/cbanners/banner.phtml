@@ -17,25 +17,19 @@
 
 
         <?php if ( $helper->haveLink() ) : ?>
+            <?php echo $helper->bannerHtmlWrap($banner, 'start'); ?>
 
-            <a href="<?php echo $banner->getUrl(); ?>" target="<?php echo $banner->getUrlTarget(); ?>">
+                <a href="<?php echo $banner->getUrl(); ?>" target="<?php echo $banner->getUrlTarget(); ?>">
+                    <?php echo $image; ?>
+                </a>
 
-            <?php  if (trim($banner->getHtml()) != ''  ) : ?>
-
-                <?php echo str_replace('{{image}}', $image, $banner->getHtml()); ?>
-
-             <?php else: ?>
-
-                <?php echo $image; ?>
-
-            <?php  endif;?>
-
-            </a>
-
+            <?php echo $helper->bannerHtmlWrap($banner, 'end'); ?>
         <?php else:  ?>
+            <?php echo $helper->bannerHtmlWrap($banner, 'start'); ?>
 
             <?php echo $image; ?>
 
+            <?php echo $helper->bannerHtmlWrap($banner, 'end'); ?>
         <?php endif; ?>
 
         <?php if($banner->getType() == 'timer'): ?>

@@ -48,4 +48,16 @@ class CeicomExtends_CBanners_Helper_Data extends Mage_Core_Helper_Abstract
         return $htmlwrap;
     }
 
+    public function bannerHtmlWrap($banner, $index)
+    {
+        $htmlwrap = explode('{{image}}', $banner->getHtml());
+        if ($index == 'start') {
+            $htmlwrap = $htmlwrap[0];
+        }elseif ($index == 'end') {
+            $htmlwrap = $htmlwrap[1];
+        }
+
+        return $htmlwrap;
+    }
+
 }
