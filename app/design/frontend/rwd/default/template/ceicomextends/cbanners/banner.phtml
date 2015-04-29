@@ -4,7 +4,7 @@
 ?>
 
 <?php if ($title): ?>
-    <h2><a href="/"><?php echo $title ?></a></h2>
+    <h2><?php echo $title ?></h2>
 <?php endif ?>
 
 <?php foreach ($banners as $banner): ?>
@@ -16,21 +16,19 @@
     <?php if( $helper->isWithinTheTime($banner) && $banner->getIsEnabled() ): ?>
 
 
+        <?php echo $helper->bannerHtmlWrap($banner, 'start'); ?>
         <?php if ( $helper->haveLink() ) : ?>
-            <?php echo $helper->bannerHtmlWrap($banner, 'start'); ?>
 
                 <a href="<?php echo $banner->getUrl(); ?>" target="<?php echo $banner->getUrlTarget(); ?>">
                     <?php echo $image; ?>
                 </a>
 
-            <?php echo $helper->bannerHtmlWrap($banner, 'end'); ?>
         <?php else:  ?>
-            <?php echo $helper->bannerHtmlWrap($banner, 'start'); ?>
 
             <?php echo $image; ?>
 
-            <?php echo $helper->bannerHtmlWrap($banner, 'end'); ?>
         <?php endif; ?>
+        <?php echo $helper->bannerHtmlWrap($banner, 'end'); ?>
 
         <?php if($banner->getType() == 'timer'): ?>
 
