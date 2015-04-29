@@ -31,15 +31,6 @@ class CeicomExtends_CBanners_Helper_Data extends Mage_Core_Helper_Abstract
         return $this->image;
     }
 
-    public function setImage($attributes = null)
-    {
-        if ( ($attributes != null) && is_array($attributes) ) {
-            $this->image = str_replace(array('{{id}}', '{{class}}', '{{src}}', '{{alt}}', '{{secondsLeft}}' ), $attributes, $this->imagTemplate);
-        }else {
-            $this->image = $this->imagTemplate;
-        }
-    }
-
     public function haveLink()
     {
         return true;

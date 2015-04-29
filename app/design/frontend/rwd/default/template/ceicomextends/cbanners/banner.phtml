@@ -7,35 +7,48 @@
     <h2><a href="/"><?php echo $title ?></a></h2>
 <?php endif ?>
 
-
 <?php foreach ($banners as $banner): ?>
     <?php echo $helper->groupHtmlWrap($banner, 'start'); ?>
 
-        <?php if( $helper->isWithinTheTime($banner) && $banner->getIsEnabled() ): ?>
+    <?php $imageData = $this->getImageBannerData($banner); ?>
+    <?php $image = "<img id='{$imageData['id']}' class='{$imageData['class']}' src='/media/ibanners/{$banner->getImage()}' alt='{$banner->getAltText()}' data-secondsLeft='{$helper->getTimeLeft($banner)}' >"; ?>
 
-            <?php if ( $helper->haveLink() ) : ?>
+    <?php if( $helper->isWithinTheTime($banner) && $banner->getIsEnabled() ): ?>
 
-                <a href="<?php echo $banner->getUrl(); ?>" target="<?php echo $banner->getUrlTarget(); ?>">
-                    <?php echo $this->getBannerHtml($banner); ?>
-                </a>
 
-            <?php else:  ?>
+        <?php if ( $helper->haveLink() ) : ?>
 
-                <?php echo $this->getBannerHtml($banner); ?>
+            <a href="<?php echo $banner->getUrl(); ?>" target="<?php echo $banner->getUrlTarget(); ?>">
 
-            <?php endif; ?>
+            <?php  if (trim($banner->getHtml()) != ''  ) : ?>
 
-            <?php if($banner->getType() == 'timer'): ?>
+                <?php echo str_replace('{{image}}', $image, $banner->getHtml()); ?>
 
-                <script type="text/javascript">
-                    jQuery(function () {
-                        jQuery('#timer-<?php echo $banner->getId();  ?>').countdown();
-                    });
-                </script>
+             <?php else: ?>
 
-            <?php endif; ?>
+                <?php echo $image; ?>
+
+            <?php  endif;?>
+
+            </a>
+
+        <?php else:  ?>
+
+            <?php echo $image; ?>
 
         <?php endif; ?>
+
+        <?php if($banner->getType() == 'timer'): ?>
+
+            <script type="text/javascript">
+                jQuery(function () {
+                    jQuery('#timer-<?php echo $banner->getId();  ?>').countdown();
+                });
+            </script>
+
+        <?php endif; ?>
+
+    <?php endif; ?>
 
     <?php echo $helper->groupHtmlWrap($banner, 'end'); ?>
 <?php endforeach; ?>

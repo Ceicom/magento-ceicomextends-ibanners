@@ -31,18 +31,15 @@ class CeicomExtends_CBanners_Block_Banner extends Mage_Core_Block_Template imple
         }
 
         $bannersData = Mage::getModel('ibanners/banner')->getCollection()
-            ->addFieldToFilter('banner_id', array('in' => $allBannerIds));
-
+            ->addFieldToFilter('banner_id', array('in' => $allBannerIds))
+            ->setOrder('sort_order', 'asc');
         $this->setBannerCollection($bannersData);
 
         return parent::_toHtml();
     }
 
-    public function getBannerHtml($banner)
+    public function getImageBannerData($banner)
     {
-        $helper = Mage::helper('cbanners');
-        $html = '';
-
         if($banner->getType() == 'timer') {
             $cssClass = "banner-timer {$banner->getCssClass()}";
             $id = "{$banner->getType()}-{$banner->getId()}";
@@ -50,16 +47,7 @@ class CeicomExtends_CBanners_Block_Banner extends Mage_Core_Block_Template imple
             $cssClass = $banner->getCssClass();
             $id = $banner->getId();
         }
-
-        $helper->setImage( array( $id, $cssClass, "{$banner->getImage()}", $banner->getAltText(), $helper->getTimeLeft($banner) ) );
-
-        if (trim($banner->getHtml()) != ''  ) {
-            $html = str_replace('{{image}}', $helper->getImage(), $banner->getHtml());
-        }else {
-            $html = $helper->getImage();
-        }
-
-        return $html;
+        return array( 'id' => $id, 'class' => $cssClass );
     }
 
     public function getBannerCollection()
