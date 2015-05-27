@@ -2,7 +2,6 @@
 class CeicomExtends_CBanners_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
-    private $imagTemplate = "<img id='{{id}}' class='{{class}}' src='/media/ibanners/{{src}}' alt='{{alt}}' data-secondsLeft='{{secondsLeft}}' >";
     private $image;
 
     public function getTimeLeft($banner)

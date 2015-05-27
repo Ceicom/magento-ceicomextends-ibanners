@@ -126,6 +126,13 @@ class CeicomExtends_CBanners_Block_Adminhtml_Banner_Edit_Tab_Form extends Mage_A
             'class'     => 'required-entry',
         ));
 
+        $fieldset->addField('image_mobile', 'image', array(
+            'name'      => 'image_mobile',
+            'label'     => $this->__('image mobile'),
+            'title'     => $this->__('image mobile'),
+            'class'     => 'required-entry',
+        ));
+
         $fieldset->addField('sort_order', 'text', array(
             'name'      => 'sort_order',
             'label'     => $this->__('Sort Order'),
@@ -140,6 +147,8 @@ class CeicomExtends_CBanners_Block_Adminhtml_Banner_Edit_Tab_Form extends Mage_A
             'required' => true,
             'values' => Mage::getModel('adminhtml/system_config_source_yesno')->toOptionArray(),
         ));
+
+        Mage::log(print_r(Mage::registry('ibanners_banner')->getData(), true), null, 'cbanners.log');
 
         if ($banner = Mage::registry('ibanners_banner')) {
             $form->setValues($banner->getData());

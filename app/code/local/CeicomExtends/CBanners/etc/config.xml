@@ -2,7 +2,7 @@
 <config>
     <modules>
         <CeicomExtends_CBanners>
-            <version>0.1.2</version>
+            <version>0.1.3</version>
         </CeicomExtends_CBanners>
     </modules>
     <global>
@@ -39,6 +39,17 @@
             </cbanners_setup>
         </resources>
     </global>
+<!--     <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <cbanners before="Fishpig_iBanners_Adminhtml">CeicomExtends_CBanners_Adminhtml</cbanners>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin> -->
     <frontend>
         <layout>
             <updates>

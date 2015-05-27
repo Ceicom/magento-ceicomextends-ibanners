@@ -2,16 +2,15 @@
  $helper = Mage::helper('cbanners');
  $banners = $this->getBannerCollection();
 ?>
-
 <?php if ($title): ?>
     <h2><?php echo $title ?></h2>
 <?php endif ?>
-
 <?php foreach ($banners as $banner): ?>
+
     <?php echo $helper->groupHtmlWrap($banner, 'start'); ?>
 
     <?php $imageData = $this->getImageBannerData($banner); ?>
-    <?php $image = "<img id='{$imageData['id']}' class='{$imageData['class']}' src='/media/ibanners/{$banner->getImage()}' alt='{$banner->getAltText()}' data-secondsLeft='{$helper->getTimeLeft($banner)}' >"; ?>
+    <?php $image = "<img id='{$imageData['id']}' class='{$imageData['class']}' src='/media/ibanners/{$banner->getImage()}' alt='{$banner->getAltText()}' data-secondsLeft='{$helper->getTimeLeft($banner)}' srcset='/media/ibanners/{$banner->getImageMobile()} 768px' >"; ?>
 
     <?php if( $helper->isWithinTheTime($banner) && $banner->getIsEnabled() ): ?>
 
