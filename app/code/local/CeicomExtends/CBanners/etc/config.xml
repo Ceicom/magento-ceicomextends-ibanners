@@ -2,7 +2,7 @@
 <config>
     <modules>
         <CeicomExtends_CBanners>
-            <version>0.1.3</version>
+            <version>0.1.4</version>
         </CeicomExtends_CBanners>
     </modules>
     <global>
