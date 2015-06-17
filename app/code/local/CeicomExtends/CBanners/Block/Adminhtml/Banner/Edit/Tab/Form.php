@@ -148,8 +148,6 @@ class CeicomExtends_CBanners_Block_Adminhtml_Banner_Edit_Tab_Form extends Mage_A
             'values' => Mage::getModel('adminhtml/system_config_source_yesno')->toOptionArray(),
         ));
 
-        Mage::log(print_r(Mage::registry('ibanners_banner')->getData(), true), null, 'cbanners.log');
-
         if ($banner = Mage::registry('ibanners_banner')) {
             $form->setValues($banner->getData());
         }
