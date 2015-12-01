@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<widgets>
+	<ceicomextends_ibanners_banners_list type="ceicomextends_ibanners/banner_widget_list" translate="name description" module="ibanners">
+		<name>iBanners - Ceicom Extends</name>
+		<description>Use this widget to show the banners you want</description>
+		<parameters>
+			<custom_template translate="label description">
+				<required>0</required>
+                <visible>1</visible>
+                <label>Template</label>
+                <description>Leave empty to use the default file: ceicomextends/ibanners/banner/widget/list.phtml</description>
+                <type>text</type>
+			</custom_template>
+			<wrapper_class translate="label description">
+				<required>0</required>
+                <visible>1</visible>
+                <label>Wrapper Class</label>
+                <description>It will be used in the widget wrapper</description>
+                <type>text</type>
+			</wrapper_class>			
+			<display_by translate="label description">
+				<required>1</required>
+	            <visible>1</visible>
+	            <label>Show Banners by</label>
+	            <description>You can specify a Group or select specific Banners to show</description>
+	            <type>select</type>
+	            <value>group</value>
+	            <values>
+	                <group>
+	                    <value>group</value>
+	                    <label>Group</label>
+	                </group>
+	                <banners>
+	                    <value>banners</value>
+	                    <label>Specific Banners</label>
+	                </banners>
+	            </values>
+			</display_by>
+			<group translate="label">
+				<required>1</required>
+	            <visible>1</visible>
+	            <label>Select the Group to show</label>
+	            <type>select</type>
+	            <depends>
+	            	<display_by>
+	            		<value>group</value>
+	            	</display_by>
+	            </depends>
+	            <source_model>ceicomextends_ibanners/source_groups</source_model>
+			</group>
+			<banners translate="label">
+				<required>1</required>
+	            <visible>1</visible>
+	            <label>Select the Banners to show</label>
+	            <type>multiselect</type>
+	            <depends>
+	            	<display_by>
+	            		<value>banners</value>
+	            	</display_by>
+	            </depends>
+	            <source_model>ceicomextends_ibanners/source_banners</source_model>
+			</banners>
+			<show_countdown translate="label description">
+				<required>1</required>
+	            <visible>1</visible>
+	            <label>Show Countdown</label>
+	            <description>Set to "Yes" if you want to show a countdown along with the banner (use CSS to put it over image, for example)</description>
+	            <type>select</type>
+	            <value>0</value>
+	            <depends>
+	            	<display_by>
+	            		<value>group</value>
+	            	</display_by>
+	            </depends>
+	            <source_model>adminhtml/system_config_source_yesno</source_model>
+			</show_countdown>
+			<use_custom_countdown_formatter translate="label description">
+				<required>1</required>
+	            <visible>1</visible>
+	            <label>Use custom Countdown formatter</label>
+	            <description>Keep "No" to use the default formatter (hours:minutes:seconds. Eg. 48:25:30). Set to "Yes" if you want to customize the formatter</description>
+	            <type>select</type>
+	            <value>0</value>
+	            <depends>
+	            	<show_countdown>
+	            		<value>1</value>
+	            	</show_countdown>
+	            </depends>
+	            <source_model>adminhtml/system_config_source_yesno</source_model>
+			</use_custom_countdown_formatter>
+			<custom_countdown_formatter translate="label description">
+				<required>1</required>
+                <visible>1</visible>
+                <label>Custom Countdown formatter (advanced)</label>
+                <description><![CDATA[See <a href="http://hilios.github.io/jQuery.countdown/documentation.html#formatter" target="_blank">http://hilios.github.io/jQuery.countdown/documentation.html#formatter</a> for more details. Use quotes to wrap the string value because it's possible to concat it with a variable called "event"]]></description>
+                <type>text</type>
+                <depends>
+	            	<use_custom_countdown_formatter>
+	            		<value>1</value>
+	            	</use_custom_countdown_formatter>
+	            </depends>
+			</custom_countdown_formatter>
+		</parameters>
+	</ceicomextends_ibanners_banners_list>
+</widgets>

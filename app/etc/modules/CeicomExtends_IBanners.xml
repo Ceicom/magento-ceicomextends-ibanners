@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <CeicomExtends_IBanners>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+				<Fishpig_iBanners/>
+			</depends>
+        </CeicomExtends_IBanners>
+    </modules>
+</config>

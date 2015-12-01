@@ -1,0 +1,5 @@
+app/code/local/CeicomExtends/IBanners app/code/local/CeicomExtends/IBanners
+app/etc/modules/* app/etc/modules/
+app/design/frontend/base/default/template/ceicomextends/* app/design/frontend/base/default/template/ceicomextends/
+skin/frontend/base/default/ceicomextends/* skin/frontend/base/default/ceicomextends/
+app/locale/en_US/* app/locale/en_US/

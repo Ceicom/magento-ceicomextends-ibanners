@@ -1,0 +1,47 @@
+<?php
+	$_banners = $this->getBannerCollection();
+?>
+
+<?php if ($_banners): ?>
+	<div class="widget-banners <?php echo $this->getWrapperClass(); ?>">
+		<?php foreach ($_banners as $_banner): ?>
+			<div class="banner <?php echo $_banner->getWrapperClass(); ?>" id="banner-<?php echo $_banner->getId(); ?>">
+				<?php if ($_banner->hasUrl()): ?>
+					<a href="<?php echo $_banner->getUrl(); ?>" title="<?php echo $this->escapeHtml($_banner->getTitle()); ?>">
+				<?php endif; ?>				
+				<img src="<?php echo $_banner->getImageUrl(); ?>" alt="<?php echo $this->escapeHtml($_banner->getAltText()); ?>" />
+				<?php if ($_banner->hasUrl()): ?>
+					</a>
+				<?php endif; ?>
+
+				<?php if ($_banner->getHtml()): ?>
+					<?php echo $_banner->getHtml(); ?>
+				<?php endif; ?>
+
+				<?php if ($this->getShowCountdown() && $_banner->getEndDate()): ?>
+					<div class="countdown" id="countdown-banner-<?php echo $_banner->getId(); ?>"></div>
+					<?php $endDate = Mage::helper('ceicomextends_ibanners')->getLocaleDate($_banner->getEndDate()); ?>
+					
+					<script>
+						(function () {
+							var finalDate = "<?php echo $endDate->toString('yyyy/MM/dd HH:mm:ss'); ?>";
+                            var clock = jQuery('#countdown-banner-<?php echo $_banner->getId(); ?>');
+                            var clockDisplay = jQuery('<div class="countdown-display"></div>').insertAfter(clock);
+                            var totalHours = formatter = '';
+
+                            clock.countdown(finalDate, function(event) {
+                            	<?php if ($this->getUseCustomCountdownFormatter()): ?>
+									formatter = <?php echo $this->getCustomCountdownFormatter(); ?>;
+                            	<?php else: ?>
+                            		totalHours = ('0' + (event.offset.totalDays * 24 + event.offset.hours)).slice(-2);
+                            		formatter = totalHours + ':%M:%S';
+                            	<?php endif; ?>
+                                clockDisplay.text(event.strftime(formatter));
+                            });
+                        })();
+					</script>
+				<?php endif; ?>
+			</div>
+		<?php endforeach; ?>
+	</div>
+<?php endif; ?>
